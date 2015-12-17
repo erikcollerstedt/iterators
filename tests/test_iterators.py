@@ -3,13 +3,26 @@ from exercises.iterators import Cubes, Primes, Fibonacci, Alphabet, Permutations
 import json
 
 
-class IteratorTests(unittest.TestCase):
+class CubesIteratorTests(IteratorTestCase):
+
+    def test_is_iterator(self):
+        self.assertIn('__init__', dir(Cubes))
+        iterator = iter(Cubes())
+        self.assertIn('__next__', dir(iterator))
 
     def test_cubes(self):
         c = iter(Cubes())
         for i in range(1, 1001):
-            value = next(c)
-            self.assertEqual(c, i ** 3)
+            with self.subTest(i = i):
+                self.assertEqual(next(c), i ** 3)
+
+
+class PrimesIteratorTests(IteratorTestCase):
+
+    def test_is_iterator(self):
+        self.assertIn('__init__', dir(Primes))
+        iterator = iter(Primes())
+        self.assertIn('__next__', dir(iterator))
 
     def test_primes(self):
         with open('tests/data_primes.json') as file:
@@ -17,7 +30,16 @@ class IteratorTests(unittest.TestCase):
 
         p = iter(Primes())
         for prime in data:
-            self.assertEqual(next(p), prime)
+            with self.subTest(prime = prime):
+                self.assertEqual(next(p), prime)
+
+
+class FibonacciIteratorTests(IteratorTestCase):
+
+    def test_is_iterator(self):
+        self.assertIn('__init__', dir(Fibonacci))
+        iterator = iter(Fibonacci())
+        self.assertIn('__next__', dir(iterator))
 
     def test_fibonacci(self):
         with open('tests/data_fibonacci.json') as file:
@@ -25,22 +47,57 @@ class IteratorTests(unittest.TestCase):
 
         f = iter(Fibonacci())
         for fibonacci in data:
-            self.assertEqual(next(f), fibonacci)
+            with self.subTest(fibonacci = fibonacci):
+                self.assertEqual(next(f), fibonacci)
+
+
+class AlphabetIteratorTests(IteratorTestCase):
+
+    def test_is_iterator(self):
+        self.assertIn('__init__', dir(Alphabet))
+        iterator = iter(Alphabet())
+        self.assertIn('__next__', dir(iterator))
 
     def test_alphabet(self):
         data = ['Alef', 'Bet', 'Gimel', 'Dalet', 'He', 'Vav', 'Zayin', 'Het',
                 'Tet', 'Yod', 'Kaf', 'Lamed', 'Mem', 'Nun', 'Samekh', 'Ayin',
                 'Pe', 'Tsadi', 'Qof', 'Resh', 'Shin', 'Tav']
 
-        a = iter(Fibonacci())
+        a = iter(Alphabet())
         for alpha in data:
-            self.assertEqual(next(a), alpha)
+            with self.subTest(alpha = alpha):
+                self.assertEqual(next(a), alpha)
         self.assertRaises(StopIteration, next, a)
 
-    @unittest.skip
-    def test_permutations(self):
-        pass
 
-    @unittest.skip
+class PermutationsIteratorTests(IteratorTestCase):
+
+    def test_is_iterator(self):
+        self.assertIn('__init__', dir(Permutations))
+        iterator = iter(Permutations())
+        self.assertIn('__next__', dir(iterator))
+
+    def test_permutations(self):
+        data = ['abc', 'acb', 'bac', 'cab', 'cba', 'bca']
+        result = []
+        p = iter(Permutations())
+        for i in data:
+            result.append(next(p))
+        self.assertCountEqual(result, data)
+        self.assertRaises(StopIteration, next, p)
+
+
+class LookAndSayIteratorTests(IteratorTestCase):
+
+    def test_is_iterator(self):
+        self.assertIn('__init__', dir(LookAndSay))
+        iterator = iter(LookAndSay())
+        self.assertIn('__next__', dir(iterator))
+
     def test_lookandsay(self):
-        pass
+        with open('tests/data_lookandsay.json') as file:
+            data = json.load(file)
+
+        l = iter(LookAndSay())
+        for value in data:
+            self.assertEqual(next(l), value)
