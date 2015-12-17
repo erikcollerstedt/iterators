@@ -1,5 +1,6 @@
 """Övningar på iterators"""
 
+import math
 
 class Cubes():
     """En iterator som skapar en serie med kuber (i ** 3).
@@ -10,8 +11,17 @@ class Cubes():
     Talserien ska inte ha något slut.
 
     """
-    pass
 
+    def __init__(self):
+        self.x = 0
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        self.x += 1
+        return self.x ** 3
+    
 
 class Primes():
     """En iterator som returnerar primtal.
@@ -19,7 +29,24 @@ class Primes():
     Talserien som förväntas börjar alltså: 2, 3, 5, 7, 11, 13, 17, 19, 23, ...
 
     """
-    pass
+    @staticmethod
+    def check_primes(x):
+        for i in range(2, int(math.sqrt(x)) + 1):
+            if (x % i) == 0:
+                return False
+        return True
+    
+    def __init__(self):
+        self.x = 1  
+        
+    def __next__(self):
+        while True:
+            self.x += 1
+            if Primes.check_primes(self.x):
+                return self.x
+    
+    def __iter__(self):
+        return self    
 
 
 class Fibonacci():
@@ -31,7 +58,16 @@ class Fibonacci():
     Alltså börjar serien: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, ...
 
     """
-    pass
+    #def __init__(self):
+
+    """def __iter__(self):
+        self.a = 0
+        self.b = 1
+        return self """
+    
+    #def __next__(self):
+
+
 
 
 class Alphabet():
