@@ -58,17 +58,18 @@ class Fibonacci():
     Alltså börjar serien: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, ...
 
     """
-    #def __init__(self):
+    def __init__(self):
+        pass
 
-    """def __iter__(self):
+    def __iter__(self):
         self.a = 0
         self.b = 1
-        return self """
+        return self
     
-    #def __next__(self):
-
-
-
+    def __next__(self):
+        x = self.a 
+        self.a, self.b = self.b, self.a + self.b
+        return x
 
 class Alphabet():
     """En iterator som returnerar namnen på tecknen i det hebreiska alfabetet.
@@ -80,7 +81,7 @@ class Alphabet():
     Nun, Samekh, Ayin, Pe, Tsadi, Qof, Resh, Shin, Tav
 
     """
-
+    pass
 
 class Permutations():
     """En iterator som returnerar alla permutationer av en inmatad sträng.
@@ -102,4 +103,19 @@ class LookAndSay():
     1211 läses 'en etta, en tvåa, två ettor', alltså 111221
     111221 läses 'tre ettor, två tvåor, en etta', alltså 312211
     """
-    pass
+    def __init__(self):
+        pass
+    def __intr__(self):
+        self.a = 1
+        self.b = 10
+        return self.a
+        return self.a + self.b 
+
+    def __next__(self):
+        x = self.a + self.b * 2  
+
+
+
+
+
+

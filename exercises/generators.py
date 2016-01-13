@@ -42,8 +42,13 @@ def alphabet():
 
     Alef, Bet, Gimel, Dalet, He, Vav, Zayin, Het, Tet, Yod, Kaf, Lamed, Mem,
     Nun, Samekh, Ayin, Pe, Tsadi, Qof, Resh, Shin, Tav
-
     """
+
+    alphabet = [Alef, Bet, Gimel, Dalet, He, Vav, Zayin, Het, Tet, Yod, Kaf, Lamed, Mem,
+    Nun, Samekh, Ayin, Pe, Tsadi, Qof, Resh, Shin, Tav]
+
+    for word in alphabet:
+        yield word
 
 
 def permutations():
